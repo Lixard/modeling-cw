@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+group 'ru.borisov'
+version '1.0-SNAPSHOT'
+
+javafx {
+    version = "16"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.base']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.rgielen:javafx-weaver-spring-boot-starter:1.3.0'
+}
