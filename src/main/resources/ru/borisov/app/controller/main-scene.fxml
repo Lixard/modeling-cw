@@ -1,11 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity"
+            prefHeight="460.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
             fx:controller="ru.borisov.app.controller.MainSceneController">
     <children>
-        <Label layoutX="256.0" layoutY="192.0" text="HELLO WORLD"/>
+        <AnchorPane layoutX="14.0" layoutY="6.0" prefHeight="208.0" prefWidth="572.0" style="-fx-border-color: black;"
+                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="6.0" prefHeight="208.0" prefWidth="566.0"
+                      AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                      AnchorPane.topAnchor="5.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="255.0" text="Параметры моделирования"
+                               textAlignment="CENTER"/>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="dataComputeSpeed" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="177.0"
+                                       text="- cкорость обработки данных"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestSizeField" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="+-"/>
+                                <TextField fx:id="requestSizeDeltaField" prefHeight="27.0" prefWidth="45.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="183.0"
+                                       text="- размер поступающих заявок"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestIntervalField" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="+-"/>
+                                <TextField fx:id="requestIntervalDeltaField" prefHeight="27.0" prefWidth="45.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="189.0"
+                                       text="- интервал поступления заявок"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="terminalProcessingTimeField" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="318.0"
+                                       text="- время, предоставляемое терминалу для обработки"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="globalModelingTimeField" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="148.0"
+                                       text="- время моделирования"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Button fx:id="startModelingButton" disable="true" mnemonicParsing="false"
+                                        text="Начать моделирование"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="16.0" layoutY="231.0" prefHeight="240.0" prefWidth="580.0" style="-fx-border-color: black;"
+                    AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="7.0" prefHeight="227.0" prefWidth="568.0"
+                      AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                      AnchorPane.topAnchor="5.0">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="169.0"
+                               text="Результаты моделирования" textAlignment="CENTER"/>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestsCompleteField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="123.0"
+                                       text="- заявок обслужено"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestsCompleteWithoutQueueField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="198.0"
+                                       text="- заявок обслужено без очереди"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestsCompleteWithQueueField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="193.0"
+                                       text="- заявок обслужено с очередью"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestsDropField" disable="true" prefHeight="27.0" prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="112.0" text="- заявок потеряно"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="requestsNotCompleteField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="147.0"
+                                       text="- незаконченные заявки"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="cyclesCompleteField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="117.0" text="- циклов пройдено"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="failureProbabilityField" disable="true" prefHeight="27.0"
+                                           prefWidth="75.0"/>
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="129.0"
+                                       text="- вероятность отказа"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

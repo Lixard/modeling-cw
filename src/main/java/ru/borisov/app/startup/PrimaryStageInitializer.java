@@ -24,6 +24,8 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
     public void onApplicationEvent(StageReadyEvent event) {
         final var scene = new Scene(fxWeaver.loadView(MainSceneController.class));
         event.stage.setScene(scene);
+        event.stage.setMinHeight(490);
+        event.stage.setMinWidth(600);
         event.stage.show();
     }
 }
