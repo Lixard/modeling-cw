@@ -5,19 +5,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.borisov.app.model.SimulateInputDataModel;
 import ru.borisov.app.model.SimulateResultModel;
-import ru.borisov.app.service.SimulateService;
+import ru.borisov.app.service.impl.SimulateServiceImpl;
 
 import java.util.function.UnaryOperator;
 
 @Component
 @FxmlView("main-scene.fxml")
 public class MainSceneController {
-
-    private final SimulateService simulateService;
 
     @FXML
     private TextField dataComputeSpeed;
@@ -64,11 +61,6 @@ public class MainSceneController {
     @FXML
     private TextField failureProbabilityField;
 
-    @Autowired
-    public MainSceneController(SimulateService simulateService) {
-        this.simulateService = simulateService;
-    }
-
     @FXML
     public void initialize() {
         validateInputFieldsNotNull();
@@ -78,7 +70,7 @@ public class MainSceneController {
     }
 
     private void simulate() {
-        final var results = simulateService.simulate(
+        final var results = new SimulateServiceImpl(
                 SimulateInputDataModel.builder()
                         .dataComputeSpeed(Integer.parseInt(dataComputeSpeed.getText()))
                         .requestSize(Integer.parseInt(requestSizeField.getText()))
@@ -88,7 +80,7 @@ public class MainSceneController {
                         .terminalProcessingTime(Integer.parseInt(terminalProcessingTimeField.getText()))
                         .globalModelingTime(Long.parseLong(globalModelingTimeField.getText()))
                         .build()
-        );
+        ).simulate();
         setResults(results);
     }
 
