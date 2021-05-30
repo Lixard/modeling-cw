@@ -19,8 +19,7 @@ public class SimulateResultModel {
     private int requestsComplete;
     private int requestsCompleteWithoutQueue;
     private int requestsCompleteWithQueue;
-    private int requestsDrop;
     private int requestsNotComplete;
     private int cyclesComplete;
-    private double failureProbability;
+    private double computerLoad;
 }

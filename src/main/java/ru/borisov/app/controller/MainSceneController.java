@@ -10,6 +10,8 @@ import ru.borisov.app.model.SimulateInputDataModel;
 import ru.borisov.app.model.SimulateResultModel;
 import ru.borisov.app.service.impl.SimulateServiceImpl;
 
+import java.text.DecimalFormat;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 @Component
@@ -50,16 +52,13 @@ public class MainSceneController {
     private TextField requestsCompleteWithQueueField;
 
     @FXML
-    private TextField requestsDropField;
-
-    @FXML
     private TextField requestsNotCompleteField;
 
     @FXML
     private TextField cyclesCompleteField;
 
     @FXML
-    private TextField failureProbabilityField;
+    private TextField computerLoadField;
 
     @FXML
     public void initialize() {
@@ -88,20 +87,19 @@ public class MainSceneController {
         requestsCompleteField.setText(String.valueOf(results.getRequestsComplete()));
         requestsCompleteWithoutQueueField.setText(String.valueOf(results.getRequestsCompleteWithoutQueue()));
         requestsCompleteWithQueueField.setText(String.valueOf(results.getRequestsCompleteWithQueue()));
-        requestsDropField.setText(String.valueOf(results.getRequestsDrop()));
         requestsNotCompleteField.setText(String.valueOf(results.getRequestsNotComplete()));
         cyclesCompleteField.setText(String.valueOf(results.getCyclesComplete()));
-        failureProbabilityField.setText(computePercentageOf(results.getFailureProbability()));
+        computerLoadField.setText(computePercentageOf(results.getComputerLoad()));
     }
 
     private String computePercentageOf(double value) {
-        return String.format("%.3f", value * 100);
+        return new DecimalFormat("#%").format(value);
     }
 
     private void validateFieldsOnlyNumber(TextField... textFields) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
-            if (text.matches("\\A[0-9]+\\Z")) {
+            if (text.matches("\\A[0-9]+\\Z") || Objects.equals(text, "")) {
                 return change;
             }
             return null;
