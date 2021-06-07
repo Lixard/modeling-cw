@@ -46,13 +46,19 @@ public class MainSceneController {
     private TextField requestsCompleteField;
 
     @FXML
-    private TextField requestsCompleteWithoutQueueField;
-
-    @FXML
     private TextField requestsCompleteWithQueueField;
 
     @FXML
-    private TextField requestsNotCompleteField;
+    private TextField queueOnFirstTerminalField;
+
+    @FXML
+    private TextField queueOnSecondTerminalField;
+
+    @FXML
+    private TextField queueOnThirdTerminalField;
+
+    @FXML
+    private TextField queueOnGlobalField;
 
     @FXML
     private TextField cyclesCompleteField;
@@ -85,9 +91,11 @@ public class MainSceneController {
 
     private void setResults(SimulateResultModel results) {
         requestsCompleteField.setText(String.valueOf(results.getRequestsComplete()));
-        requestsCompleteWithoutQueueField.setText(String.valueOf(results.getRequestsCompleteWithoutQueue()));
         requestsCompleteWithQueueField.setText(String.valueOf(results.getRequestsCompleteWithQueue()));
-        requestsNotCompleteField.setText(String.valueOf(results.getRequestsNotComplete()));
+        queueOnFirstTerminalField.setText(String.valueOf(results.getRequestsNotCompleteOnFirstTerminal()));
+        queueOnSecondTerminalField.setText(String.valueOf(results.getRequestsNotCompleteOnSecondTerminal()));
+        queueOnThirdTerminalField.setText(String.valueOf(results.getRequestsNotCompleteOnThirdTerminal()));
+        queueOnGlobalField.setText(String.valueOf(results.getRequestsNotCompleteOnGlobalQueue()));
         cyclesCompleteField.setText(String.valueOf(results.getCyclesComplete()));
         computerLoadField.setText(computePercentageOf(results.getComputerLoad()));
     }

@@ -17,9 +17,11 @@ import lombok.Setter;
 public class SimulateResultModel {
 
     private int requestsComplete;
-    private int requestsCompleteWithoutQueue;
     private int requestsCompleteWithQueue;
-    private int requestsNotComplete;
+    private int requestsNotCompleteOnFirstTerminal;
+    private int requestsNotCompleteOnSecondTerminal;
+    private int requestsNotCompleteOnThirdTerminal;
+    private int requestsNotCompleteOnGlobalQueue;
     private int cyclesComplete;
     private double computerLoad;
 }

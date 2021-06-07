@@ -14,6 +14,7 @@ import java.util.Queue;
 @NoArgsConstructor
 public class Terminal {
 
+    public int id;
     public int genCycleTime;
     public int requestGenInterval;
     public Queue<Task> queue;

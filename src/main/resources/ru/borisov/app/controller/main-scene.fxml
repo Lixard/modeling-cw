@@ -70,22 +70,34 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <TextField fx:id="requestsCompleteWithoutQueueField" disable="true" prefHeight="27.0" prefWidth="75.0" />
-                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="248.0" text="- заявок обслужено не из общей очереди" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                            <children>
                                 <TextField fx:id="requestsCompleteWithQueueField" disable="true" prefHeight="27.0" prefWidth="75.0" />
                                 <Label alignment="CENTER" prefHeight="17.0" prefWidth="231.0" text="- заявок обслужено из общей очереди" />
                             </children>
                         </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="queueOnFirstTerminalField" disable="true" prefHeight="27.0" prefWidth="75.0" />
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="278.0" text="- незаконченные заявки на первом терминале" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="queueOnSecondTerminalField" disable="true" prefHeight="27.0" prefWidth="75.0" />
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="278.0" text="- незаконченные заявки на втором терминале" />
+                     </children>
+                  </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <TextField fx:id="requestsNotCompleteField" disable="true" prefHeight="27.0" prefWidth="75.0" />
-                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="147.0" text="- незаконченные заявки" />
+                                <TextField fx:id="queueOnThirdTerminalField" disable="true" prefHeight="27.0" prefWidth="75.0" />
+                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="282.0" text="- незаконченные заявки на третьем терминале" />
                             </children>
                         </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="queueOnGlobalField" disable="true" prefHeight="27.0" prefWidth="75.0" />
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="253.0" text="- незаконченные заявки в общей очереди" />
+                     </children>
+                  </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                             <children>
                                 <TextField fx:id="cyclesCompleteField" disable="true" prefHeight="27.0" prefWidth="75.0" />

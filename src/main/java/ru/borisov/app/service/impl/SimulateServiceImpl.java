@@ -9,7 +9,6 @@ import ru.borisov.app.service.SimulateService;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 /**
  * @author Maxim Borisov
@@ -30,7 +29,6 @@ public class SimulateServiceImpl implements SimulateService {
     private int cycleCounter = 0;
 
     private int requestsComplete = 0;
-    private int requestsCompleteWithoutGlobalQueue = 0;
     private int requestsCompleteWithGlobalQueue = 0;
     private int cyclesComplete = 0;
     private double computerLoad = 0;
@@ -82,7 +80,6 @@ public class SimulateServiceImpl implements SimulateService {
                         computeTime = 0;
                         final var taskToRemove = selectedTerminal.queue.remove();
                         if (taskToRemove.isFromGlobalQueue) requestsCompleteWithGlobalQueue++;
-                        else requestsCompleteWithoutGlobalQueue++;
                         requestsComplete++;
                     }
                 }
@@ -96,41 +93,42 @@ public class SimulateServiceImpl implements SimulateService {
 
         return SimulateResultModel.builder()
                 .requestsComplete(requestsComplete)
-                .requestsCompleteWithoutQueue(requestsCompleteWithoutGlobalQueue)
                 .requestsCompleteWithQueue(requestsCompleteWithGlobalQueue)
-                .requestsNotComplete(countNotCompletedTasks())
+                .requestsNotCompleteOnFirstTerminal(findTerminalQueueSizeById(1))
+                .requestsNotCompleteOnSecondTerminal(findTerminalQueueSizeById(2))
+                .requestsNotCompleteOnThirdTerminal(findTerminalQueueSizeById(3))
+                .requestsNotCompleteOnGlobalQueue(globalQueue.size())
                 .cyclesComplete(cyclesComplete)
                 .computerLoad(1.00)
                 .build();
     }
 
-    private int countNotCompletedTasks() {
-        final var collected = terminals.stream()
+    private int findTerminalQueueSizeById(int id) {
+        return terminals.stream()
+                .filter(terminal -> terminal.id == id)
                 .map(terminal -> terminal.queue.size())
-                .collect(Collectors.toList());
-
-        collected.add(globalQueue.size());
-
-        return collected.stream()
-                .reduce(Integer::sum)
-                .orElse(0);
+                .findAny()
+                .orElseThrow();
     }
 
     private void preparation() {
         terminals.add(
                 Terminal.builder()
+                        .id(1)
                         .requestGenInterval(computeWithDelta(requestInterval, requestIntervalDelta))
                         .queue(new ArrayDeque<>())
                         .build()
         );
         terminals.add(
                 Terminal.builder()
+                        .id(2)
                         .requestGenInterval(computeWithDelta(requestInterval, requestIntervalDelta))
                         .queue(new ArrayDeque<>())
                         .build()
         );
         terminals.add(
                 Terminal.builder()
+                        .id(3)
                         .requestGenInterval(computeWithDelta(requestInterval, requestIntervalDelta))
                         .queue(new ArrayDeque<>())
                         .build()
