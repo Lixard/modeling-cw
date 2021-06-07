@@ -1,11 +1,16 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'ru.borisov'
 version '1.0-SNAPSHOT'
+
+springBoot {
+    mainClassName = 'ru.borisov.app.App'
+}
 
 javafx {
     version = "16"
