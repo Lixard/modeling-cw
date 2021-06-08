@@ -12,14 +12,18 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.stage.FileChooser;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.borisov.app.model.SimulateInputDataModel;
 import ru.borisov.app.model.SimulateResultModel;
+import ru.borisov.app.service.FileService;
 import ru.borisov.app.service.impl.SimulateServiceImpl;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
@@ -27,6 +31,8 @@ import java.util.function.UnaryOperator;
 @Component
 @FxmlView("main-scene.fxml")
 public class MainSceneController {
+
+    private final FileService fileService;
 
     @FXML
     private TextField dataComputeSpeed;
@@ -92,12 +98,32 @@ public class MainSceneController {
     private Label queueOnGlobalQueueSchemaCounter;
 
     @FXML
+    private Button exportToFileButton;
+
+    private SimulateResultModel lastResult;
+
+    @Autowired
+    public MainSceneController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @FXML
     public void initialize() {
         validateInputFieldsNotNull();
         validateFieldsOnlyNumber(dataComputeSpeed, requestSizeField, requestSizeDeltaField, requestIntervalField,
                 requestIntervalDeltaField, terminalProcessingTimeField, globalModelingTimeField);
         setupSchemaBackground();
-        startModelingButton.setOnAction(event -> simulate());
+        startModelingButton.setOnAction(event -> {
+            simulate();
+            exportToFileButton.setDisable(false);
+        });
+        exportToFileButton.setOnAction(event -> exportToFile());
+    }
+
+    private void exportToFile() {
+        final var fileChooser = new FileChooser().showSaveDialog(schemaPane.getScene().getWindow());
+        final var filePath = Path.of(fileChooser.getAbsolutePath());
+        fileService.saveToFile(lastResult, filePath).toFile();
     }
 
     private void setupSchemaBackground() {
@@ -133,6 +159,7 @@ public class MainSceneController {
                         .globalModelingTime(Long.parseLong(globalModelingTimeField.getText()))
                         .build()
         ).simulate();
+        this.lastResult = results;
         setResults(results);
     }
 

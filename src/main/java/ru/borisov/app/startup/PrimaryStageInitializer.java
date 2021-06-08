@@ -32,6 +32,7 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
         event.stage.setMinHeight(490);
         event.stage.setMinWidth(600);
         event.stage.setTitle("Моделирование работы ЭВМ с круговым циклическим алгоритмом");
+        event.stage.setResizable(false);
         setAppIcon(event.stage);
         event.stage.show();
     }

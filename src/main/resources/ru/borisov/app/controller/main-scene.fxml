@@ -153,10 +153,10 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <VBox alignment="CENTER" prefHeight="268.0" prefWidth="405.0" spacing="5.0">
+                  <VBox alignment="CENTER" prefHeight="268.0" prefWidth="405.0" spacing="5.0" style="-fx-border-color: black;">
                      <children>
-                                <Button fx:id="startModelingButton" disable="true" mnemonicParsing="false" text="Начать моделирование" />
-                        <Button fx:id="exportToFileButton" mnemonicParsing="false" text="Экспортировать в файл" />
+                                <Button fx:id="startModelingButton" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="294.0" text="Начать моделирование" />
+                        <Button fx:id="exportToFileButton" disable="true" mnemonicParsing="false" text="Экспортировать последние результаты  в файл" />
                      </children>
                   </VBox>
                </children>

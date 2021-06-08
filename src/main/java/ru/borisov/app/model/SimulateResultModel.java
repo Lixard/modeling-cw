@@ -24,4 +24,18 @@ public class SimulateResultModel {
     private int requestsNotCompleteOnGlobalQueue;
     private int cyclesComplete;
     private double computerLoad;
+
+    @Override
+    public String toString() {
+        return "================================================\n" +
+                "Заявок обслужено - " + requestsComplete + '\n' +
+                "Заявок обслужено из общей очереди - " + requestsCompleteWithQueue + '\n' +
+                "Неоконченные заявки на первом терминале - " + requestsNotCompleteOnFirstTerminal + '\n' +
+                "Неоконченные заявки на втором терминале - " + requestsNotCompleteOnSecondTerminal + '\n' +
+                "Неоконченные заявки на третьем терминале - " + requestsNotCompleteOnThirdTerminal + '\n' +
+                "Неоконченные заявки в общей очереди - " + requestsNotCompleteOnGlobalQueue + '\n' +
+                "Циклов пройдено - " + cyclesComplete + '\n' +
+                "загрузка ЭВМ - " + computerLoad + '\n' +
+                "===============================================\n";
+    }
 }
