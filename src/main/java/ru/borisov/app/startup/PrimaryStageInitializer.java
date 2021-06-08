@@ -1,11 +1,16 @@
 package ru.borisov.app.startup;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.borisov.app.controller.MainSceneController;
+
+import java.io.IOException;
 
 /**
  * @author Maxim Borisov
@@ -26,6 +31,16 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
         event.stage.setScene(scene);
         event.stage.setMinHeight(490);
         event.stage.setMinWidth(600);
+        event.stage.setTitle("Моделирование работы ЭВМ с круговым циклическим алгоритмом");
+        setAppIcon(event.stage);
         event.stage.show();
+    }
+
+    private void setAppIcon(final Stage stage) {
+        try {
+            stage.getIcons().add(new Image(new ClassPathResource("icon.jpg").getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

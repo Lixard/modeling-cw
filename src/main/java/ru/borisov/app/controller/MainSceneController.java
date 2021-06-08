@@ -2,14 +2,24 @@ package ru.borisov.app.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.borisov.app.model.SimulateInputDataModel;
 import ru.borisov.app.model.SimulateResultModel;
 import ru.borisov.app.service.impl.SimulateServiceImpl;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
@@ -67,11 +77,48 @@ public class MainSceneController {
     private TextField computerLoadField;
 
     @FXML
+    private AnchorPane schemaPane;
+
+    @FXML
+    private Label queueOnFirstTerminalSchemaCounter;
+
+    @FXML
+    private Label queueOnSecondTerminalSchemaCounter;
+
+    @FXML
+    private Label queueOnThirdTerminalSchemaCounter;
+
+    @FXML
+    private Label queueOnGlobalQueueSchemaCounter;
+
+    @FXML
     public void initialize() {
         validateInputFieldsNotNull();
         validateFieldsOnlyNumber(dataComputeSpeed, requestSizeField, requestSizeDeltaField, requestIntervalField,
                 requestIntervalDeltaField, terminalProcessingTimeField, globalModelingTimeField);
+        setupSchemaBackground();
         startModelingButton.setOnAction(event -> simulate());
+    }
+
+    private void setupSchemaBackground() {
+        final var image = catchImageFromResources();
+        final var backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(100, 100, true, true, true, true)
+        );
+        final var background = new Background(backgroundImage);
+        schemaPane.setBackground(background);
+    }
+
+    private Image catchImageFromResources() {
+        try {
+            return new Image(new ClassPathResource("schema.png").getInputStream());
+        } catch (IOException e) {
+            throw new IllegalStateException("That cannot happen", e);
+        }
     }
 
     private void simulate() {
@@ -98,6 +145,11 @@ public class MainSceneController {
         queueOnGlobalField.setText(String.valueOf(results.getRequestsNotCompleteOnGlobalQueue()));
         cyclesCompleteField.setText(String.valueOf(results.getCyclesComplete()));
         computerLoadField.setText(computePercentageOf(results.getComputerLoad()));
+
+        queueOnFirstTerminalSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnFirstTerminal()));
+        queueOnSecondTerminalSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnSecondTerminal()));
+        queueOnThirdTerminalSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnThirdTerminal()));
+        queueOnGlobalQueueSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnGlobalQueue()));
     }
 
     private String computePercentageOf(double value) {
