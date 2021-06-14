@@ -118,6 +118,17 @@ public class MainSceneController {
             exportToFileButton.setDisable(false);
         });
         exportToFileButton.setOnAction(event -> exportToFile());
+        initValues();
+    }
+
+    private void initValues() {
+        dataComputeSpeed.setText("10");
+        requestSizeField.setText("300");
+        requestSizeDeltaField.setText("50");
+        requestIntervalField.setText("30");
+        requestIntervalDeltaField.setText("5");
+        terminalProcessingTimeField.setText("30");
+        globalModelingTimeField.setText("18000");
     }
 
     private void exportToFile() {
