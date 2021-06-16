@@ -33,7 +33,6 @@ public class SimulateServiceImpl implements SimulateService {
     private int cyclesComplete = 0;
 
     private double eomTime = 0;
-    private double eomRequests = 0;
 
     public SimulateServiceImpl(SimulateInputDataModel model) {
         dataComputeSpeed = model.getDataComputeSpeed();
@@ -84,7 +83,6 @@ public class SimulateServiceImpl implements SimulateService {
                     computedTask.estimatedSymbols -= dataComputeSpeed;
                     if (computedTask.estimatedSymbols <= 0) {
                         eomTime += computeTime - 1;
-                        eomRequests++;
 
                         computeTime = 0;
                         final var taskToRemove = selectedTerminal.queue.remove();
@@ -94,7 +92,6 @@ public class SimulateServiceImpl implements SimulateService {
                 }
             } else {
                 eomTime += computeTime;
-                eomRequests++;
 
                 computeTime = 0;
                 final var estimatedTask = selectedTerminal.queue.remove();
@@ -111,11 +108,12 @@ public class SimulateServiceImpl implements SimulateService {
                 .requestsNotCompleteOnGlobalQueue(globalQueue.size())
                 .cyclesComplete(cyclesComplete)
                 .computerLoad(countComputerLoad())
+                .eomTime(eomTime)
                 .build();
     }
 
     private double countComputerLoad() {
-        return eomRequests * (eomTime / eomRequests) / globalModelingTime;
+        return eomTime / globalModelingTime;
     }
 
     private int findTerminalQueueSizeById(int id) {

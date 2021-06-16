@@ -83,6 +83,9 @@ public class MainSceneController {
     private TextField computerLoadField;
 
     @FXML
+    private TextField eomTimeField;
+
+    @FXML
     private AnchorPane schemaPane;
 
     @FXML
@@ -183,6 +186,7 @@ public class MainSceneController {
         queueOnGlobalField.setText(String.valueOf(results.getRequestsNotCompleteOnGlobalQueue()));
         cyclesCompleteField.setText(String.valueOf(results.getCyclesComplete()));
         computerLoadField.setText(computePercentageOf(results.getComputerLoad()));
+        eomTimeField.setText(String.valueOf(results.getEomTime()));
 
         queueOnFirstTerminalSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnFirstTerminal()));
         queueOnSecondTerminalSchemaCounter.setText(String.valueOf(results.getRequestsNotCompleteOnSecondTerminal()));

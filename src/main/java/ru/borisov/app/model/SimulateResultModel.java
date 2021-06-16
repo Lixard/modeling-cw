@@ -24,6 +24,7 @@ public class SimulateResultModel {
     private int requestsNotCompleteOnGlobalQueue;
     private int cyclesComplete;
     private double computerLoad;
+    private double eomTime;
 
     @Override
     public String toString() {
